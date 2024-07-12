@@ -1,5 +1,12 @@
-import { TouchableOpacityProps, Text, TouchableOpacity } from "react-native";
+import {
+  TouchableOpacityProps,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+
+import { styles } from "./styles";
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
@@ -7,4 +14,27 @@ interface ButtonProps extends TouchableOpacityProps {
   icon: keyof typeof Ionicons.glyphMap;
 }
 
-export function Button({title, isLoading = false}: ButtonProps) {}
+export function Button({
+  title,
+  isLoading = false,
+  icon,
+  ...rest
+}: ButtonProps) {
+  return (
+    <TouchableOpacity
+      disabled={isLoading}
+      activeOpacity={0.8}
+      {...rest}
+      style={styles.container}
+    >
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <>
+          <Ionicons name={icon} style={styles.icon} />
+          <Text style={styles.text}>{title}</Text>
+        </>
+      )}
+    </TouchableOpacity>
+  );
+}
