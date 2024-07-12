@@ -28,7 +28,7 @@ export function Button({
       style={styles.container}
     >
       {isLoading ? (
-        <ActivityIndicator />
+        <ActivityIndicator color={"black"} />
       ) : (
         <>
           <Ionicons name={icon} style={styles.icon} />
